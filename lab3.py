@@ -169,29 +169,32 @@ class Game2048:
         self.score = temp_score
         return is_any_turn_possible
 
-    def print_playfield(self):
-        """
-            Printing scores and playfield
-        """
-        print()
-        print("+" + "======" * (self.field_size) + "+")
-        form_str = "{:^" + str(self.field_size * 6) + "}"
-        score_section = form_str.format(self.score)
-        print("|{}|".format(score_section))
-        print("+" + "======" * (self.field_size) + "+")
-        print()
-        wall = "+-----" * (len(self.play_field[0])) + "+"
+
+def print_playfield(field_size, play_field, score):
+    """
+        Printing scores and playfield
+    """
+    print(field_size)
+    print("+" + "======" * (field_size) + "+")
+    form_str = "{:^" + str(field_size * 6) + "}"
+    score_section = form_str.format(score)
+    print("|{}|".format(score_section))
+    print("+" + "======" * (field_size) + "+")
+    print()
+    wall = "+-----" * (len(play_field[0])) + "+"
+    print(wall)
+    for row in play_field:
+        core = "|".join("{:^5}".format(val) for val in row)
+        print("|{}|".format(core))
         print(wall)
-        for row in self.play_field:
-            core = "|".join("{:^5}".format(val) for val in row)
-            print("|{}|".format(core))
-            print(wall)
+
 
 def cls():
     """
         Clearing console, depending on OS
     """
-    os.system('cls' if os.name=='nt' else 'clear')
+    os.system('cls' if os.name == 'nt' else 'clear')
+
 
 def main():
     try:
@@ -205,7 +208,9 @@ def main():
 
     while game_session.possible_options_check():
         cls()
-        game_session.print_playfield()
+        print_playfield(game_session.field_size,
+                        game_session.play_field,
+                        game_session.score)
         select_action = input("(WASD) + Enter: ")
         if (select_action == "a" or select_action == "A"):
             game_session.move_left()
