@@ -4,7 +4,14 @@ from copy import deepcopy
 
 
 class Game2048:
+    """
+        Console incarnation of 2048
+    """
     def __init__(self, size=2):
+        """
+            size - represents the size of playfield, 2 - by default
+            here comes playfield initialization
+        """
         self.field_size = size
         self.score = 0
         self.free_spots = []
@@ -14,6 +21,13 @@ class Game2048:
         self.generate_new_value()
 
     def check_avaliable_cells(self):
+        """
+            here comes the search of free cells,    
+            if there are free cells - return True   
+            otherwise - False   
+            also, filling free spots list with  
+            free spots coordinates (turple)
+        """
         self.free_spots = []
         space_avaliable = False
         for i, row in enumerate(self.play_field):
@@ -24,6 +38,10 @@ class Game2048:
         return space_avaliable
 
     def generate_new_value(self):
+        """
+            generating value here, to fill 
+            empty cells
+        """
         while True:
             if not self.check_avaliable_cells():
                 break
@@ -37,6 +55,9 @@ class Game2048:
         return self.play_field
 
     def move_up(self):
+        """
+            Moving down. Iterating on column from up to down
+        """        
         for j in range(0, self.field_size):
             while True:
                 actions_performed = 0
@@ -59,6 +80,9 @@ class Game2048:
         return self.play_field
 
     def move_down(self):
+        """
+            Moving down. Iterating on column from down to up
+        """
         for j in range(0, self.field_size):
             while True:
                 actions_performed = 0
@@ -81,6 +105,9 @@ class Game2048:
         return self.play_field
 
     def move_right(self):
+        """
+            Moving down. Iterating on column from left to right
+        """        
         for i in range(0, self.field_size):
             while True:
                 actions_performed = 0
@@ -103,6 +130,9 @@ class Game2048:
         return self.play_field
 
     def move_left(self):
+        """
+            Moving down. Iterating on column from right to left
+        """        
         for i in range(0, self.field_size):
             while True:
                 actions_performed = 0
@@ -125,6 +155,9 @@ class Game2048:
         return self.play_field
 
     def possible_options_check(self):
+        """
+            Looking for opportunities, return false if not found
+        """         
         temp_map = deepcopy(self.play_field)
         temp_score = self.score
         self.move_left()
@@ -137,14 +170,16 @@ class Game2048:
         return is_any_turn_possible
 
     def print_playfield(self):
-        print("")
-
+        """
+            Printing scores and playfield
+        """
+        print()
         print("+" + "======" * (self.field_size) + "+")
         form_str = "{:^" + str(self.field_size * 6) + "}"
         score_section = form_str.format(self.score)
         print("|{}|".format(score_section))
         print("+" + "======" * (self.field_size) + "+")
-        print("")
+        print()
         wall = "+-----" * (len(self.play_field[0])) + "+"
         print(wall)
         for row in self.play_field:
@@ -153,6 +188,9 @@ class Game2048:
             print(wall)
 
 def cls():
+    """
+        Clearing console, depending on OS
+    """
     os.system('cls' if os.name=='nt' else 'clear')
 
 def main():
