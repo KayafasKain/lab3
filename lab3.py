@@ -154,7 +154,7 @@ class Game2048:
         self.generate_new_value()
         return self.play_field
 
-    def possible_options_check(self):
+    def has_moves(self):
         """
             Looking for opportunities, return false if not found
         """         
@@ -168,6 +168,19 @@ class Game2048:
         self.play_field = deepcopy(temp_map)
         self.score = temp_score
         return is_any_turn_possible
+
+    def get_field(self):
+        """ returns current playfield (matrix) """
+        return self.play_field
+
+    def get_size(self):
+        """ returns field size (int) """
+        return self.field_size                
+
+    def get_score(self):
+        """ returns score (int) """
+        return self.score               
+
 
 
 def print_playfield(field_size, play_field, score):
@@ -206,11 +219,11 @@ def main():
 
     game_session = Game2048(size)
 
-    while game_session.possible_options_check():
+    while game_session.has_moves():
         cls()
-        print_playfield(game_session.field_size,
-                        game_session.play_field,
-                        game_session.score)
+        print_playfield(game_session.get_size(),
+                        game_session.get_field(),
+                        game_session.get_score())
         select_action = input("(WASD) + Enter: ")
         if (select_action == "a" or select_action == "A"):
             game_session.move_left()
