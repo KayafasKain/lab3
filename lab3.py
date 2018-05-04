@@ -43,7 +43,6 @@ class Game2048:
             Moving rows/cols depending on 
             passed direction value (l/r/u/d)
         """
-        print(direction)
         dir_from = 0
         dir_to = 0 
         dir_sign = 1
@@ -112,101 +111,25 @@ class Game2048:
         """
             Moving down. Iterating on column from up to down
         """        
-        for j in range(0, self.field_size):
-            while True:
-                actions_performed = 0
-                for i in range(1, self.field_size):
-                    if self.play_field[i][j] != 0:
-                        if self.play_field[i - 1][j] == 0:
-                            temp = self.play_field[i][j]
-                            self.play_field[i - 1][j] = temp
-                            self.play_field[i][j] = 0
-                            actions_performed += 1
-                        elif self.play_field[i - 1][j] == self.play_field[i][j]:
-                            self.play_field[i - 1][j] *= 2
-                            self.play_field[i][j] = 0
-                            self.score += self.play_field[i - 1][j]
-                            actions_performed += 1
-                if actions_performed == 0:
-                    break
-        self.generate_new_value()
-        self.generate_new_value()
-        return self.play_field
+        return self.move("u")
 
     def move_down(self):
         """
             Moving down. Iterating on column from down to up
         """
-        for j in range(0, self.field_size):
-            while True:
-                actions_performed = 0
-                for i in range(self.field_size, 1, -1):
-                    if self.play_field[-i][j] != 0:
-                        if self.play_field[-i + 1][j] == 0:
-                            temp = self.play_field[-i][j]
-                            self.play_field[-i + 1][j] = temp
-                            self.play_field[-i][j] = 0
-                            actions_performed += 1
-                        elif self.play_field[-i + 1][j] == self.play_field[-i][j]:
-                            self.play_field[-i + 1][j] *= 2
-                            self.play_field[-i][j] = 0
-                            self.score += self.play_field[-i + 1][j]
-                            actions_performed += 1
-                if actions_performed == 0:
-                    break
-        self.generate_new_value()
-        self.generate_new_value()
-        return self.play_field
+        return self.move("d")
 
     def move_right(self):
         """
             Moving down. Iterating on column from left to right
         """        
-        for i in range(0, self.field_size):
-            while True:
-                actions_performed = 0
-                for j in range(self.field_size, 1, -1):
-                    if self.play_field[i][-j] != 0:
-                        if self.play_field[i][-j + 1] == 0:
-                            temp = self.play_field[i][-j]
-                            self.play_field[i][-j + 1] = temp
-                            self.play_field[i][-j] = 0
-                            actions_performed += 1
-                        elif self.play_field[i][-j + 1] == self.play_field[i][-j]:
-                            self.play_field[i][-j + 1] *= 2
-                            self.play_field[i][-j] = 0
-                            self.score += self.play_field[i][-j + 1]
-                            actions_performed += 1
-                if actions_performed == 0:
-                    break
-        self.generate_new_value()
-        self.generate_new_value()
-        return self.play_field
+        return self.move("r")
 
     def move_left(self):
         """
-            Moving down. Iterating on column from right to left
+            Moving down
         """        
-        for i in range(0, self.field_size):
-            while True:
-                actions_performed = 0
-                for j in range(1, self.field_size):
-                    if self.play_field[i][j] != 0:
-                        if self.play_field[i][j - 1] == 0:
-                            temp = self.play_field[i][j]
-                            self.play_field[i][j - 1] = temp
-                            self.play_field[i][j] = 0
-                            actions_performed += 1
-                        elif self.play_field[i][j - 1] == self.play_field[i][j]:
-                            self.play_field[i][j - 1] *= 2
-                            self.play_field[i][j] = 0
-                            self.score += self.play_field[i][j - 1]
-                            actions_performed += 1
-                if actions_performed == 0:
-                    break
-        self.generate_new_value()
-        self.generate_new_value()
-        return self.play_field
+        return self.move("l")
 
     def has_moves(self):
         """
