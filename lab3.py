@@ -152,6 +152,8 @@ class Game2048:
             print("|{}|".format(core))
             print(wall)
 
+def cls():
+    os.system('cls' if os.name=='nt' else 'clear')
 
 def main():
     try:
@@ -164,7 +166,7 @@ def main():
     game_session = Game2048(size)
 
     while game_session.possible_options_check():
-        os.system("clear")
+        cls()
         game_session.print_playfield()
         select_action = input("(WASD) + Enter: ")
         if (select_action == "a" or select_action == "A"):
