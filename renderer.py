@@ -26,7 +26,7 @@ class Renderer:
         self.game_session = game.Game2048(size)
         self.stdscr = stdscr
 
-    def cls():
+    def cls(self):
         """
             Clearing console, depending on OS
         """
