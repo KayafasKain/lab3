@@ -4,6 +4,7 @@ from random import randint, choice
 from copy import deepcopy
 
 
+
 class Game2048:
     """
         Console incarnation of 2048
