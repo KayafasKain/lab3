@@ -1,14 +1,12 @@
 import os
 from game2048_core import game2048 as game
 
-
-
-is_curses_avaliable = True
-
 try:
     import curses
 except ImportError:
-    is_curses_avaliable = False
+    print("Curses is not available.")
+    print("Install it or enjoy console version of game.")
+    print()
 
 
 class Renderer:
@@ -153,7 +151,7 @@ def main():
     except:
         size = 2 
            
-    if is_curses_avaliable:   
+    if curses == None:   
         curses.wrapper(draw_game, size)
     else:
         render = Renderer(size)
