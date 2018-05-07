@@ -6,6 +6,7 @@ try:
 except ImportError:
     print("Curses is not available.")
     print("Install it or enjoy console version of game.")
+    curses = None
     print()
 
 
@@ -151,7 +152,7 @@ def main():
     except:
         size = 2 
            
-    if curses == None:   
+    if curses != None:   
         curses.wrapper(draw_game, size)
     else:
         render = Renderer(size)
